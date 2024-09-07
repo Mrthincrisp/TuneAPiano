@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuneAPiano", "TuneAPiano.csproj", "{650678E3-0395-479B-9045-39E86C9B8D60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{650678E3-0395-479B-9045-39E86C9B8D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650678E3-0395-479B-9045-39E86C9B8D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650678E3-0395-479B-9045-39E86C9B8D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650678E3-0395-479B-9045-39E86C9B8D60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B3F07E8-D921-43F8-B338-37D0026099BA}
+	EndGlobalSection
+EndGlobal
