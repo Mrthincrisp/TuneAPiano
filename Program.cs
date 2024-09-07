@@ -38,5 +38,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+ArtistAPI.Map(app);
 SongAPI.Map(app);
 app.Run();

@@ -12,7 +12,6 @@ namespace TuneAPiano.API
             {
                 var newSong = mapper.Map<Song>(newSongDto);
 
-                // Handle genres manually
                 newSong.SongGenres = newSongDto.GenreIds.Select(genreId => new SongGenre
                 {
                     GenreId = genreId,
