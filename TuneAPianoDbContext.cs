@@ -58,52 +58,52 @@ using TuneAPiano.Models;
         // Seed data for SongGenres
         modelBuilder.Entity<SongGenre>().HasData(
             // Symphony No. 5
-            new SongGenre { Id = 1, SongId = 1, GenreId = 1 }, // Classical
-            new SongGenre { Id = 2, SongId = 1, GenreId = 3 }, // Baroque
+            new SongGenre { Id = 1, SongId = 1, GenreId = 1 }, 
+            new SongGenre { Id = 2, SongId = 1, GenreId = 3 }, 
 
             // Moonlight Sonata
-            new SongGenre { Id = 3, SongId = 2, GenreId = 1 }, // Classical
-            new SongGenre { Id = 4, SongId = 2, GenreId = 2 }, // Romantic
+            new SongGenre { Id = 3, SongId = 2, GenreId = 1 }, 
+            new SongGenre { Id = 4, SongId = 2, GenreId = 2 }, 
 
             // Eine kleine Nachtmusik
-            new SongGenre { Id = 5, SongId = 3, GenreId = 1 }, // Classical
-            new SongGenre { Id = 6, SongId = 3, GenreId = 2 }, // Romantic
+            new SongGenre { Id = 5, SongId = 3, GenreId = 1 }, 
+            new SongGenre { Id = 6, SongId = 3, GenreId = 2 }, 
 
             // Requiem
-            new SongGenre { Id = 7, SongId = 4, GenreId = 1 }, // Classical
-            new SongGenre { Id = 8, SongId = 4, GenreId = 2 }, // Romantic
-            new SongGenre { Id = 9, SongId = 4, GenreId = 3 }, // Baroque
+            new SongGenre { Id = 7, SongId = 4, GenreId = 1 }, 
+            new SongGenre { Id = 8, SongId = 4, GenreId = 2 }, 
+            new SongGenre { Id = 9, SongId = 4, GenreId = 3 }, 
 
             // Nocturne in E-flat Major
-            new SongGenre { Id = 10, SongId = 5, GenreId = 1 }, // Classical
-            new SongGenre { Id = 11, SongId = 5, GenreId = 2 }, // Romantic
+            new SongGenre { Id = 10, SongId = 5, GenreId = 1 }, 
+            new SongGenre { Id = 11, SongId = 5, GenreId = 2 }, 
 
             // Prelude in D-flat Major
-            new SongGenre { Id = 12, SongId = 6, GenreId = 1 }, // Classical
-            new SongGenre { Id = 13, SongId = 6, GenreId = 2 }, // Romantic
+            new SongGenre { Id = 12, SongId = 6, GenreId = 1 }, 
+            new SongGenre { Id = 13, SongId = 6, GenreId = 2 }, 
 
             // Toccata and Fugue in D minor
-            new SongGenre { Id = 14, SongId = 7, GenreId = 3 }, // Baroque
-            new SongGenre { Id = 15, SongId = 7, GenreId = 4 }, // Impressionist
+            new SongGenre { Id = 14, SongId = 7, GenreId = 3 }, 
+            new SongGenre { Id = 15, SongId = 7, GenreId = 4 }, 
 
             // Brandenburg Concerto No. 3
-            new SongGenre { Id = 16, SongId = 8, GenreId = 3 }, // Baroque
-            new SongGenre { Id = 17, SongId = 8, GenreId = 4 }, // Impressionist
+            new SongGenre { Id = 16, SongId = 8, GenreId = 3 },
+            new SongGenre { Id = 17, SongId = 8, GenreId = 4 }, 
 
             // Clair de Lune
-            new SongGenre { Id = 18, SongId = 9, GenreId = 4 }, // Impressionist
-            new SongGenre { Id = 19, SongId = 9, GenreId = 5 }, // Modern
+            new SongGenre { Id = 18, SongId = 9, GenreId = 4 }, 
+            new SongGenre { Id = 19, SongId = 9, GenreId = 5 }, 
 
             // La Mer
-            new SongGenre { Id = 20, SongId = 10, GenreId = 4 }, // Impressionist
-            new SongGenre { Id = 21, SongId = 10, GenreId = 5 }, // Modern
+            new SongGenre { Id = 20, SongId = 10, GenreId = 4 }, 
+            new SongGenre { Id = 21, SongId = 10, GenreId = 5 }, 
 
             // Symphony No. 9
-            new SongGenre { Id = 22, SongId = 11, GenreId = 1 }, // Classical
-            new SongGenre { Id = 23, SongId = 11, GenreId = 2 }, // Romantic
+            new SongGenre { Id = 22, SongId = 11, GenreId = 1 }, 
+            new SongGenre { Id = 23, SongId = 11, GenreId = 2 }, 
 
             // Don Giovanni
-            new SongGenre { Id = 24, SongId = 12, GenreId = 1 } // Classical
+            new SongGenre { Id = 24, SongId = 12, GenreId = 1 } 
         );
 
 

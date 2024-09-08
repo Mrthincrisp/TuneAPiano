@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TuneAPiano.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class GroundZero : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,14 +43,19 @@ namespace TuneAPiano.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    ArtistId = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    ArtistId = table.Column<int>(type: "integer", nullable: true),
                     Album = table.Column<string>(type: "text", nullable: true),
-                    Length = table.Column<int>(type: "integer", nullable: false)
+                    Length = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Songs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Songs_Artists_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artists",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -59,12 +64,24 @@ namespace TuneAPiano.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SingId = table.Column<int>(type: "integer", nullable: false),
-                    GenreId = table.Column<int>(type: "integer", nullable: false)
+                    SongId = table.Column<int>(type: "integer", nullable: false),
+                    GenreId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SongsGenres", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SongsGenres_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SongsGenres_Songs_SongId",
+                        column: x => x.SongId,
+                        principalTable: "Songs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -86,7 +103,9 @@ namespace TuneAPiano.Migrations
                 {
                     { 1, "Classical" },
                     { 2, "Romantic" },
-                    { 3, "Baroque" }
+                    { 3, "Baroque" },
+                    { 4, "Impressionist" },
+                    { 5, "Modern" }
                 });
 
             migrationBuilder.InsertData(
@@ -110,21 +129,55 @@ namespace TuneAPiano.Migrations
 
             migrationBuilder.InsertData(
                 table: "SongsGenres",
-                columns: new[] { "Id", "GenreId", "SingId" },
+                columns: new[] { "Id", "GenreId", "SongId" },
                 values: new object[,]
                 {
                     { 1, 1, 1 },
-                    { 2, 1, 2 },
-                    { 3, 2, 5 },
-                    { 4, 3, 7 },
-                    { 5, 2, 9 }
+                    { 2, 3, 1 },
+                    { 3, 1, 2 },
+                    { 4, 2, 2 },
+                    { 5, 1, 3 },
+                    { 6, 2, 3 },
+                    { 7, 1, 4 },
+                    { 8, 2, 4 },
+                    { 9, 3, 4 },
+                    { 10, 1, 5 },
+                    { 11, 2, 5 },
+                    { 12, 1, 6 },
+                    { 13, 2, 6 },
+                    { 14, 3, 7 },
+                    { 15, 4, 7 },
+                    { 16, 3, 8 },
+                    { 17, 4, 8 },
+                    { 18, 4, 9 },
+                    { 19, 5, 9 },
+                    { 20, 4, 10 },
+                    { 21, 5, 10 },
+                    { 22, 1, 11 },
+                    { 23, 2, 11 },
+                    { 24, 1, 12 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Songs_ArtistId",
+                table: "Songs",
+                column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SongsGenres_GenreId",
+                table: "SongsGenres",
+                column: "GenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SongsGenres_SongId",
+                table: "SongsGenres",
+                column: "SongId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Artists");
+                name: "SongsGenres");
 
             migrationBuilder.DropTable(
                 name: "Genres");
@@ -133,7 +186,7 @@ namespace TuneAPiano.Migrations
                 name: "Songs");
 
             migrationBuilder.DropTable(
-                name: "SongsGenres");
+                name: "Artists");
         }
     }
 }
