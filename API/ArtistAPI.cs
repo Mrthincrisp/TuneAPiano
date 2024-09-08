@@ -110,6 +110,22 @@ namespace TuneAPiano.API
                 };
 
             });
+
+            //Get artits by genre
+            app.MapGet("/artits/genre/{id}", (TuneAPianoDbContext db, int id) =>
+            {
+
+                var artist = db.SongsGenres
+                    .Where(sg => sg.GenreId == id)
+                    .Include(sg => sg.Song)
+                    .ThenInclude(s => s.Artist)
+                    .Select(sg => new
+                    {
+                        ArtistName = sg.Song.Artist.Name
+                    })
+                    .Distinct().ToList();
+                return Results.Ok(artist);
+            });
         }
     }
 }
