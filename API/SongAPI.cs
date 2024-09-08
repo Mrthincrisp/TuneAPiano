@@ -97,6 +97,51 @@ namespace TuneAPiano.API
                 return Results.Ok(songDto);
 
             });
+
+            //Get songs by genre
+            app.MapGet("/songs/genre/{id}", (TuneAPianoDbContext db, int id) =>
+            {
+
+                var song = db.SongsGenres
+                    .Where(sg => sg.GenreId == id)
+                    .Include(sg => sg.Song)
+                    .ToList();
+
+                return Results.Ok(song);
+
+            });
+
+            //Get entities by string input
+            app.MapGet("songs/artists/genres/{input}", async (TuneAPianoDbContext db, string input) =>
+            {
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return Results.BadRequest("Search term cannot be empty.");
+                }
+
+                var lowerCaseInput = input.ToLower();
+
+                var matchingSong = await db.Songs
+                    .Where(s => s.Title.ToLower().Contains(lowerCaseInput))
+                    .ToListAsync();
+
+                var matchingArtist = await db.Artists
+                    .Where(a => a.Name.ToLower().Contains(lowerCaseInput))
+                    .ToListAsync();
+
+                var matchingGenre = await db.Genres
+                    .Where(g => g.Description.ToLower().Contains(lowerCaseInput))
+                    .ToListAsync();
+
+
+                return Results.Ok(new
+                {
+                    Songs = matchingSong,
+                    Artists = matchingArtist,
+                    Genres = matchingGenre
+                });
+
+            });
         }
     }
 }

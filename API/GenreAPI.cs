@@ -5,7 +5,7 @@ namespace TuneAPiano.API
 {
     public class GenreAPI
     {
-        public static void Map(WebApplication app)
+        public static async void Map(WebApplication app)
         {
             //Get all Genres
             app.MapGet("/genres", (TuneAPianoDbContext db, IMapper mapper) => 
@@ -99,6 +99,27 @@ namespace TuneAPiano.API
                 }
 
                 return Results.Ok(genreSongs);
+
+            });
+
+            //Get genres and sort geners by most used in songsGenres
+            app.MapGet("/genre/popular", async (TuneAPianoDbContext db, IMapper mapper) =>
+            {
+
+                var genreCount = await db.SongsGenres
+                    .GroupBy(sg => sg.GenreId)
+                    .Select( g => new
+                    {
+                        //creates an anon object to filter genre/song data
+                        GenreId = g.Key,
+                        GenreName = db.Genres.FirstOrDefault(gn => gn.Id == g.Key).Description,
+                        SoungCount = g.Select(sg => sg.SongId).Distinct().Count()
+
+                    })
+                    .OrderByDescending(g => g.SoungCount)
+                    .ToListAsync();
+
+                return Results.Ok(genreCount);
 
             });
         }
