@@ -1,6 +1,7 @@
 ﻿using TuneAPiano.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 namespace TuneAPiano.API
 {
     public class SongAPI
@@ -34,13 +35,34 @@ namespace TuneAPiano.API
             app.MapPut("/songs/{id}", (TuneAPianoDbContext db, IMapper mapper, int id, SongDTO updateSongDto) =>
             {
 
-                var song = db.Songs.FirstOrDefault(s => s.Id == id);
+                var song = db.Songs.Include(s => s.SongGenres).FirstOrDefault(s => s.Id == id);
 
                 if (song == null)
                 {
                     return Results.NotFound("song id not found, song is null");
                 }
                 mapper.Map(updateSongDto, song);
+
+                var currentSongGenres = song.SongGenres.ToList();
+                var incomingGenreIds = updateSongDto.Genres.Select(g => g.Id).ToList();
+
+                //add a new genre to not currently in SongGenre
+                foreach (int genreId in incomingGenreIds)
+                {
+                    if (!currentSongGenres.Any(sg => sg.GenreId == genreId))
+                    {
+                        song.SongGenres.Add(new SongGenre { SongId = song.Id, GenreId = genreId });
+                    }
+                }
+
+                //Remove old SongGenres
+                foreach (var sg in currentSongGenres)
+                {
+                    if (!incomingGenreIds.Contains(sg.GenreId))
+                    {
+                        song.SongGenres.Remove(sg);
+                    }
+                }
 
                 try
                 {
